@@ -8,14 +8,14 @@ using static NewFAHP.Stat;
 
 namespace NewFAHP
 {
-    public class ClassicFAHP
+    public class FAHP
     {
         public readonly int CriteriaCount;
 
         private double[] criteriaWeights;
         public double[] CriteriaWeights
         {
-            get => criteriaWeights == null ? RunFAHP() : criteriaWeights;
+            get => criteriaWeights ?? RunFAHP();
             set => criteriaWeights = value;
         }
         
@@ -23,7 +23,7 @@ namespace NewFAHP
 
         public static (double, double, double)[] TFNs;
 
-        public ClassicFAHP((double, double, double)[,] ComparisonMatrix)
+        public FAHP((double, double, double)[,] ComparisonMatrix)
         {
             CriteriaCount = ComparisonMatrix.GetLength(0);
             this.ComparisonMatrix = ComparisonMatrix;
