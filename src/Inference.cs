@@ -50,13 +50,14 @@ namespace NewFAHP
                     CompMat[0, l] = TFNs[ConfLevel, - m].Inverse();
                 }
             }
-
-             for (int r = 1; r < max; r++)
-             for (int c = r + 1; c < max; c++)
+            
+             for (int r = 1; r <= max; r++)
+             for (int c = r + 1; c <= max; c++)
              {
                  CompMat[r, c] = CompMat[r, 0].Multiply(CompMat[0, c]);
                  CompMat[c, r] = CompMat[r, c].Inverse();
              }
+             
 
             return CompMat;
         }

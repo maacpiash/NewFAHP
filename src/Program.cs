@@ -16,10 +16,10 @@ namespace NewFAHP
 
             var ComparisonMatrix = Inference.ComparisonMatrix(values, ConfLevel);
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 6; i++)
             {
-                for (int j = 0; j < 5; j++)
-                    Write($"{ComparisonMatrix[i, j].Item1}, {ComparisonMatrix[i, j].Item2}, {ComparisonMatrix[i, j].Item3},");
+                for (int j = 0; j < 6; j++)
+                    Write($"{ComparisonMatrix[i, j].Item1},{ComparisonMatrix[i, j].Item2},{ComparisonMatrix[i, j].Item3},");
                 WriteLine();
             }
             
