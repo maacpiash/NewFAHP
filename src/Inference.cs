@@ -2,19 +2,12 @@ using static NewFAHP.Numbers;
 
 namespace NewFAHP
 {
-    /*
-        public static int TS_SE = 0;
-        public static int TS_MF = 1;
-        public static int TS_SA = 2;
-        public static int TS_LA = 3;
-        public static int TS_AA = 4;
-     */
-
     public static class Inference
     {
 
         public static (double, double, double)[,] ComparisonMatrix(int[] values, int ConfLevel)
         {
+#region Validation
             if (values.Length < 5)
                 throw new System.ArgumentException("At least 5 integers are expected.");
 
@@ -24,6 +17,7 @@ namespace NewFAHP
 
             if (ConfLevel < 0 || ConfLevel > 4)
                 throw new System.ArgumentException("Confidence level must be between 1 and 5.");
+#endregion
 
             (double, double, double)[,] CompMat = new (double, double, double)[6, 6];
 
@@ -36,10 +30,12 @@ namespace NewFAHP
                 { (1, 1, 1), (3, 3, 3), (5, 5, 5), (7, 7, 7), (9, 9, 9) }
             };
 
-            for (int j = 0; j < 5; j++)
+            int max = 5;
+
+            for (int j = 0; j < max; j++)
                 CompMat[j, j] = TFNs[ConfLevel, 0]; // 0-th => Equality
             
-            for (int k = 0, l, m; k < 5; k++)
+            for (int k = 0, l, m; k < max; k++)
             {
                 l = k + 1;
                 m = values[k];
@@ -55,10 +51,10 @@ namespace NewFAHP
                 }
             }
 
-             for (int r = 1; r < 5; r++)
-             for (int c = r + 1; c < 5; c++)
+             for (int r = 1; r < max; r++)
+             for (int c = r + 1; c < max; c++)
              {
-                 CompMat[r, c] = CompMat[c - 1, r - 1].Multiply(CompMat[r - 1, c]);
+                 CompMat[r, c] = CompMat[r, 0].Multiply(CompMat[0, c]);
                  CompMat[c, r] = CompMat[r, c].Inverse();
              }
 

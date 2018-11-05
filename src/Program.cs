@@ -11,6 +11,29 @@ namespace NewFAHP
 
         static void Main(string[] args)
         {
+            int[] values = { 0, 1, 2, 3, 4 };
+            int ConfLevel = 2;
+
+            var ComparisonMatrix = Inference.ComparisonMatrix(values, ConfLevel);
+
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                    Write($"{ComparisonMatrix[i, j].Item1}, {ComparisonMatrix[i, j].Item2}, {ComparisonMatrix[i, j].Item3},");
+                WriteLine();
+            }
+            
+
+            //  var fahp = new FAHP(ComparisonMatrix);
+            //  var weights = fahp.CriteriaWeights;
+             
+            // WriteLine($"TSR = {weights[0]}");
+            //  for (int i = 1; i < 6; i++)                
+            //      WriteLine($"{Criteria[i - 1]} = {weights[i]}");
+        }
+
+        static int[] TakeValues()
+        {
             int[] values = new int[5];
             int input;
             string read;
@@ -57,22 +80,8 @@ namespace NewFAHP
 
             for (int i = 0; i < 5; i++)
                 WriteLine(values[i]);
-
-            var ComparisonMatrix = Inference.ComparisonMatrix(values, input);
-
-            for (int i = 0; i < 5; i++)
-            {
-                for (int j = 0; j < 5; j++)
-                    Write($"({ComparisonMatrix[i, j].Item1}, {ComparisonMatrix[i, j].Item2}, {ComparisonMatrix[i, j].Item3})");
-                WriteLine();
-            }
             
-
-             var fahp = new FAHP(ComparisonMatrix);
-             var weights = fahp.CriteriaWeights;
-
-             for (int i = 0; i < 6; i++)
-                 WriteLine($"{Criteria[i]} = {weights[i]}");
+            return values;
         }
     }
 }
