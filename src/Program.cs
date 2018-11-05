@@ -38,11 +38,13 @@ namespace NewFAHP
 
                 if (values[i] != 0)
                 {
+                    WriteLine($"values[{i}] = {values[i]}");
                     WriteLine($"\nHow much more important?");
-                    WriteLine("[1] Weakly\n[2] Moderately\n[3] Very much\n[4] Strongly\n[5] Absolutely");
-                    Write("Please enter (1—5): ");
+                    WriteLine("[1] Weakly\n[2] Moderately\n[3] Strongly\n[4] Absolutely");
+                    Write("Please enter (1—4): ");
                     input = int.Parse(ReadLine()) - 1;
                     values[i] *= input;
+                    WriteLine($"values[{i}] = {values[i]}");
                 }
                 WriteLine();
             }
@@ -66,11 +68,11 @@ namespace NewFAHP
             }
             
 
-            // var fahp = new FAHP(ComparisonMatrix);
-            // var weights = fahp.CriteriaWeights;
+             var fahp = new FAHP(ComparisonMatrix);
+             var weights = fahp.CriteriaWeights;
 
-            // for (int i = 0; i < 6; i++)
-            //     Console.WriteLine($"{Criteria[i]} = {weights[i]}");
+             for (int i = 0; i < 6; i++)
+                 WriteLine($"{Criteria[i]} = {weights[i]}");
         }
     }
 }
