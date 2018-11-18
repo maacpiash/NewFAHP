@@ -12,28 +12,38 @@ namespace NewFAHP
                 throw new System.ArgumentException("At least 5 integers are expected.");
 
             for (int i = 0; i < 4; i++)
-                if (values[i] < -3 || values[i] > 3)
-                    throw new System.ArgumentException($"Error at {i} = {values[i]}: Fuzzy input must be between -3 and +3.");
+                if (values[i] < -9 || values[i] > 9)
+                    throw new System.ArgumentException($"Error at {i} = {values[i]}: Fuzzy input must be between -9 and +9.");
 
-            if (ConfLevel < 0 || ConfLevel > 4)
-                throw new System.ArgumentException("Confidence level must be between 1 and 5.");
+            if (ConfLevel < 0 || ConfLevel > 2)
+                throw new System.ArgumentException("Confidence level must be between 1 and 3.");
 #endregion
 
             (double, double, double)[,] CompMat = new (double, double, double)[6, 6];
 
             (double, double, double)[,] TFNs =
             {
-                { (1, 1, 3), (1, 3, 5), (3, 5, 7), (5, 7, 9), (7, 9, 9) },
-                { (1, 1, 2.5), (1.5, 3, 4.5), (3.5, 5, 6.5), (5.5, 7, 8.5), (8.5, 9, 9) },
-                { (1, 1, 2), (2, 3, 4), (4, 5, 6), (6, 7, 8), (8, 9, 9) },
-                { (1, 1, 1), (2.5, 3, 3.5), (4.5, 5, 5.5), (6.5, 7, 7.5), (9, 9, 9) },
-                { (1, 1, 1), (3, 3, 3), (5, 5, 5), (7, 7, 7), (9, 9, 9) }
+                {
+                    (1, 1, 1), (1, 2, 3), (2, 3, 4),
+                    (3, 4, 5), (4, 5, 6), (5, 6, 7),
+                    (6, 7, 8), (7, 8, 9), (9, 9, 9)
+                },
+                {
+                    (1, 1, 1), (1.5, 2, 2.5), (2.5, 3, 3.5),
+                    (3.5, 4, 4.5), (4.5, 5, 5.5), (5.5, 6, 6.5),
+                    (6.5, 7, 7.5), (7.5, 8, 8.5), (9, 9, 9)
+                },
+                {
+                    (1, 1, 1), (2, 2, 2), (3, 3, 3),
+                    (4, 4, 4), (5, 5, 5), (6, 6, 6),
+                    (7, 7, 7), (8, 8, 8), (9, 9, 9)
+                }
             };
 
             int max = 5;
 
             for (int j = 0; j < max; j++)
-                CompMat[j, j] = TFNs[ConfLevel, 0]; // 0-th => Equality
+                CompMat[j, j] = (1.0, 1.0, 1.0); // 0-th => Equality
             
             for (int k = 0, l, m; k < max; k++)
             {

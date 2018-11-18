@@ -27,7 +27,7 @@ namespace NewFAHP
         {
             CriteriaCount = ComparisonMatrix.GetLength(0);
             this.ComparisonMatrix = ComparisonMatrix;
-            //Validate();       
+            Validate();       
         }
 
         private void Validate()
@@ -43,7 +43,7 @@ namespace NewFAHP
 
             for (int i = 0; i < CriteriaCount; i++)
             {
-                if (ComparisonMatrix[i, i].Item1 != 1.0)
+                if (!ComparisonMatrix[i, i].Equals((1.0, 1.0, 1.0)))
                     throw new InvalidDataException("Each criterion must have equal importance TFN compared to itself.");
                 for (int j = i + 1; j < CriteriaCount; j++)
                 {

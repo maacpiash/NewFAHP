@@ -24,12 +24,12 @@ namespace NewFAHP
             }
             
 
-            //  var fahp = new FAHP(ComparisonMatrix);
-            //  var weights = fahp.CriteriaWeights;
+             var fahp = new FAHP(ComparisonMatrix);
+             var weights = fahp.CriteriaWeights;
              
-            // WriteLine($"TSR = {weights[0]}");
-            //  for (int i = 1; i < 6; i++)                
-            //      WriteLine($"{Criteria[i - 1]} = {weights[i]}");
+            WriteLine($"TSR = {weights[0]}");
+             for (int i = 1; i < 6; i++)                
+                 WriteLine($"{Criteria[i - 1]} = {weights[i]}");
         }
 
         static int[] TakeValues()
