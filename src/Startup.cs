@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using NewFAHP.Lib;
+
 namespace NewFAHP.App
 {
     public class Startup
@@ -31,7 +33,6 @@ namespace NewFAHP.App
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -47,6 +48,8 @@ namespace NewFAHP.App
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
+            
+            
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

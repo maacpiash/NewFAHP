@@ -12,8 +12,11 @@ namespace NewFAHP.App
 {
     public class Program
     {
+        public static Lib.Query Query;
+
         public static void Main(string[] args)
         {
+            if (Query == null) Query = new Lib.Query();
             CreateWebHostBuilder(args).Build().Run();
         }
 
