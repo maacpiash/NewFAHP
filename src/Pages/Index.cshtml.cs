@@ -98,7 +98,8 @@ namespace NewFAHP.App.Pages
             }
             Program.Query.IsMale = Sex == 1;
             Program.Query.Age = Age;
-            Program.Query.SetLocation(Division, District, Thana, UW.Split('[')[0].Trim());
+            string uw = UW == null ? "BHATARA" : UW.Split('[')[0].Trim();
+            Program.Query.SetLocation(Division ?? "DHAKA", District ?? "DHAKA", Thana ?? "BHATARA", uw);
             return RedirectToPage("/Comparison");
         }
     }

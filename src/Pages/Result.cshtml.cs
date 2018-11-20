@@ -10,41 +10,33 @@ namespace NewFAHP.App.Pages
 {
     public class ResultModel : PageModel
     {
-        [BindProperty] public double TSR { get; set; }
-
-        [BindProperty] public double MFR { get; set; }
-
-        [BindProperty] public double SES { get; set; }
-
-        [BindProperty] public double DIST { get; set; }
-
-        [BindProperty] public double AS { get; set; }
-
-        [BindProperty] public double ADS { get; set; }
-        
-        [BindProperty] public string Show { get; set; }
+        [BindProperty] public List<string> Criteria { get; set; }
+        [BindProperty] public double StdDev { get; set; }
+        [BindProperty] public string ConfLevel { get; set; }
 
         public ResultModel()
         {
-            StringBuilder sb = new StringBuilder();
-            //var compmat = Program.Query.
-            for (int i = 0; i < 6; i++)
+            Criteria = new List<string>
             {
-                for (int j = 0; j < 6; j++)
-                    sb.Append($"({Program.Query.CompMat[i, j].Item1}, {Program.Query.CompMat[i, j].Item2}, {Program.Query.CompMat[i, j].Item3}, \t");
-                sb.Append("\n");
-            }
+                "Teacher-Student ratio", "Male-Female Ratio",
+                "Socio-Economic Status", "Location of School",
+                "Age of School", "Average Age of Students"
+            };
 
-            Show = sb.ToString();    
-            
-            TSR = Program.Query.Weights[0];
-            MFR = Program.Query.Weights[1];
-            SES = Program.Query.Weights[2];
-            DIST = Program.Query.Weights[3];
-            AS = Program.Query.Weights[4];
-            ADS = Program.Query.Weights[5];
+            StdDev = GetStdDev(Program.Query.Weights);
+            ConfLevel = new string[] { "Low", "Medium", "High" }[Program.Query.ConfLevel];
         }
 
-
+        private double GetStdDev(double[] values)
+        {
+            double ret = 0;
+            if (values.Count() > 0)
+            {
+                double avg = values.Average();    
+                double sum = values.Sum(d => Math.Pow(d - avg, 2));
+                ret = Math.Sqrt((sum) / (values.Count() - 1));
+            }
+            return ret;
+        }
     }
 }

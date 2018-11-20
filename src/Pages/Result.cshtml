@@ -6,11 +6,21 @@
 
 <h2>Result</h2>
 
-<p>@Model.Show</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align: center">Criteria</th><th style="text-align: center">Weights</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < 6; i++)
+        {
+            <tr>
+                <td><p>@Model.Criteria[i]</p></td><td><p>@Program.Query.Weights[i]</p></td>
+            </tr>
+        }
+    </tbody>
+</table>
 
-<p>Teacher-Student ratio: @Model.TSR</p>
-<p>Male-Female Ratio: @Model.MFR</p>
-<p>Socio-Economic Status: @Model.SES</p>
-<p>Location of School: @Model.DIST</p>
-<p>Age of School: @Model.AS</p>
-<p>Average Age of Students: @Model.AS</p>
+<h4>Confidence Level: @Model.ConfLevel</h4>
+<h4>Standard Deviation: @Model.StdDev</h4>

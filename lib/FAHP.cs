@@ -71,7 +71,7 @@ namespace NewFAHP.Lib
             {
                 temp = (1.0, 1.0, 1.0);
                 for (int j = 0; j < CriteriaCount; j++)
-                    temp.ScalarMultiply(ComparisonMatrix[i, j]);
+                    temp = temp.ScalarMultiply(ComparisonMatrix[i, j]);
                 geomean[i] = (Pow(temp.Item1, power), Pow(temp.Item2, power), Pow(temp.Item3, power));
 
             }
