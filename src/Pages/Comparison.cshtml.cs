@@ -70,22 +70,23 @@ namespace NewFAHP.App.Pages
             }
 
             for (i = 0; i <= 3; i++)
-                compmat[i, i + 2] = compmat[i, i + 1].Multiply(compmat[i + 1, i + 2]);
+                compmat[i, i + 2] = compmat[i, i + 1].FuzzyMultiply(compmat[i + 1, i + 2]);
 
             for (i = 0; i <= 2; i++)
-                compmat[i, i + 3] = compmat[i, i + 2].Multiply(compmat[i + 2, i + 3]);
+                compmat[i, i + 3] = compmat[i, i + 2].FuzzyMultiply(compmat[i + 2, i + 3]);
 
             for (i = 0; i <= 1; i++)
-                compmat[i, i + 4] = compmat[i, i + 3].Multiply(compmat[i + 3, i + 4]);
+                compmat[i, i + 4] = compmat[i, i + 3].FuzzyMultiply(compmat[i + 3, i + 4]);
 
             i = 0;
-            compmat[i, i + 5] = compmat[i, i + 4].Multiply(compmat[i + 4, i + 5]);
+            compmat[i, i + 5] = compmat[i, i + 4].FuzzyMultiply(compmat[i + 4, i + 5]);
 
             for (int r = 1; r <= 5; r++)
                 for (int c = 0; c < r; c++)
                     compmat[r, c] = compmat[c, r].Inverse();
 
-
+            Program.Query.CompMat = compmat;
+            
             Program.Query.Weights = (new FAHP(compmat)).CriteriaWeights;
             return RedirectToPage("/Result");
 

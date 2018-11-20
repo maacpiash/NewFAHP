@@ -40,7 +40,7 @@ namespace NewFAHP.Lib
             if (ComparisonMatrix.GetLength(0) != CriteriaCount)
                 throw new InvalidDataException("Must have as many column/row as number of criteria.");
 
-            double a, b, c, d, e, f;
+            // double a, b, c, d, e, f;
 
             for (int i = 0; i < CriteriaCount; i++)
             {
@@ -65,25 +65,25 @@ namespace NewFAHP.Lib
 
             // Step 1 : Geometric Mean
             double[] weights = new double[CriteriaCount];
-            double power = 1 / (double)CriteriaCount;
-            double x, y, z;
-            (double, double, double)[] geomean = new ValueTuple<double, double, double>[CriteriaCount];
+            double power = 1.0 / 6.0;
+            (double, double, double)[] geomean = new (double, double, double)[CriteriaCount];
             for (int i = 0; i < CriteriaCount; i++)
             {
                 temp = (1.0, 1.0, 1.0);
                 for (int j = 0; j < CriteriaCount; j++)
-                    ScalarMultiply(ref temp, ComparisonMatrix[i, j]);
-                x = Pow(temp.Item1, power);
-                y = Pow(temp.Item2, power);
-                z = Pow(temp.Item3, power);
-                geomean[i] = new ValueTuple<double, double, double>(x, y, z);
+                    temp.ScalarMultiply(ComparisonMatrix[i, j]);
+                geomean[i] = (Pow(temp.Item1, power), Pow(temp.Item2, power), Pow(temp.Item3, power));
 
             }
 
             // Step 2 : Multiplying with Inverse Vector
             double L = 0, M = 0, U = 0;
             for (int i = 0; i < CriteriaCount; i++)
-                (L, M, U) = (L + geomean[i].Item1, M + geomean[i].Item2, U + geomean[i].Item3);
+            {
+                L += geomean[i].Item1;
+                M += geomean[i].Item2;
+                U += geomean[i].Item3;
+            }
 
             for (int i = 0; i < CriteriaCount; i++)
             {

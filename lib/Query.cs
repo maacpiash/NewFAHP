@@ -18,6 +18,7 @@ namespace NewFAHP.Lib
         public double SES { get; set; }
         private string _occupation;
         public string Occupation { get => _occupation; set => _occupation = Occupations.Contains(value) ? value : "Other"; }
+        public (double, double, double)[,] CompMat { get; set; }
         public double[] Weights { get; set; }
         #endregion
 

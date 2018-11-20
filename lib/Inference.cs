@@ -62,7 +62,7 @@ namespace NewFAHP.Lib
                 j = 5 - l;
                 k = 4 - l; // k = j - 1
                 for (int i = 0; i <= l; i++)
-                    CompMat[i, i + j] = CompMat[i, i + 1].Multiply(CompMat[i + k, i + j]);
+                    CompMat[i, i + j] = CompMat[i, i + 1].FuzzyMultiply(CompMat[i + k, i + j]);
             }
 
             for (int r = 1; r <= 5; r++)
@@ -73,10 +73,10 @@ namespace NewFAHP.Lib
             return CompMat;
         }
 
-        public static (double, double, double) Multiply(this (double, double, double) a, (double, double, double) b)
+        public static (double, double, double) FuzzyMultiply(this (double, double, double) a, (double, double, double) b)
         {
             double[] Items = { a.Item1 * b.Item1, a.Item1 * b.Item3, a.Item3 * b.Item1, a.Item3 * b.Item3 };
-
+                                // a1b1 a1b3 a3b1 a3b3
             double Left = Items[0], Middle = a.Item2 * b.Item2, Right = Items[0];
 
             for (int i = 0; i < 4; i++)
